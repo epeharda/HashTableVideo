@@ -22,11 +22,28 @@ using namespace std;
 
 class hashClass
 {
+    
+private:
+    //allows me to define the table size inside the class definition and use it from there
+    static const int tableSize = 10;
+    
+    //defined what an item in the hash table looks like and what it contains
+    struct item{
+        string name;
+        string drink;
+        item* next;
+    };
+    
+    //creating the hash table
+    //each of those items has a pointer that can point to some next item
+    item* HashTable[tableSize];
 
 public:
-    
+    hashClass();
     int Hash(string key);
 
+    //creating a new function prototype
+    void AddItem(string name, string drink);
 
 };
 
