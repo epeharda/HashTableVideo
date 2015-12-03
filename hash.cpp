@@ -27,9 +27,33 @@ void hashClass::AddItem(string name, string drink)
     //inspect the bucket in the hashtable that is associated w/that index
     if(HashTable[index] -> name == "empty")
     {
+        HashTable[index] -> name = name;
+        HashTable[index] -> drink = drink;
+    }
+    else
+    {
+        //creates the item to add
+        item* ptr = HashTable[index];
+        item* newItem = new item;
+        newItem -> name = name;
+        newItem -> drink = drink;
+        newItem -> next = NULL;
+        
+        //finds the place in the collision linklist to add it
+        while(ptr -> next != NULL)
+        {
+            ptr = ptr -> next;
+        }
+        
+        ptr -> next = newItem;
         
     }
 
+}
+
+int hashClass::NumberOfItemsInIndex(int index)
+{
+    
 }
 
 int hashClass::Hash(string key)
