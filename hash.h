@@ -44,6 +44,18 @@ public:
 
     //creating a new function prototype
     void AddItem(string name, string drink);
+    
+    //helper function that counts the number of items that is in our list or hashtable
+    int NumberOfItemsInIndex(int index);
+    
+    //creating a print function
+    void PrintTable();
+    
+    //to print the items in the collision index
+    void PrintItemsInIndex(int index);
+    
+    //searching for item
+    void FindDrink(string name);
 
 };
 

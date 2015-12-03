@@ -72,6 +72,70 @@ int hashClass::NumberOfItemsInIndex(int index)
     }
 }
 
+void hashClass::PrintTable()
+{
+    //holds number of elements in each bucket
+    int number;
+    
+    for(int i = 0; i < tableSize; i ++)
+    {
+        number = NumberOfItemsInIndex(i);
+        cout << "index = " << i << endl;
+        cout << HashTable[i] -> name << endl;
+        cout << HashTable[i] -> drink << endl;
+        cout << "# of items in this collision = " << number << endl;
+        cout << "--------------------------\n";
+    }
+}
+
+void hashClass::PrintItemsInIndex(int index)
+{
+    item* ptr = HashTable[index];
+    
+    if(HashTable[index]->name =="empty")
+    {
+        cout << "index = " << index << " is empty" << endl;
+    }
+    else
+    {
+        cout << "index = " << index << " contains the following items"<< endl;
+        while(ptr != NULL)
+        {
+            cout << "****************" << endl;
+            cout << ptr -> name << endl;
+            cout << ptr -> drink << endl;
+            ptr = ptr -> next;
+        } 
+    }
+
+}
+
+void hashClass::FindDrink(string name)
+{
+    int index = Hash(name);
+    bool foundName = false;
+    string drink;
+    
+    item* ptr = HashTable[index];
+    
+    while(ptr != NULL)
+    {
+        if(ptr -> name == name)
+        {
+            foundName = true;
+            drink = ptr -> drink;
+        }
+        ptr = ptr -> next;
+    }
+    
+    if(foundName == true){
+        cout << "Favorite drink = " << drink << endl;
+    }else{
+        cout << name << "'s info was not found in the Hash Table\n";
+    }
+    
+}
+
 int hashClass::Hash(string key)
 {
     int hash = 0;
@@ -79,10 +143,8 @@ int hashClass::Hash(string key)
     
     for(int x = 0; x < key.length(); x ++)
     {
-        hash = hash +  (int)key[x];
-        //cout << "key = " << key[x] << " ascii = " << (int)key[x] << endl;
+        hash = hash +(int)key[x];
     }
-    cout << "hash = " << hash << endl;
     index = hash % tableSize;
     
     return index;
