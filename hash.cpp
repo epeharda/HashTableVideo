@@ -53,7 +53,23 @@ void hashClass::AddItem(string name, string drink)
 
 int hashClass::NumberOfItemsInIndex(int index)
 {
+    int count = 0;
     
+    if(HashTable[index]->name =="empty")
+    {
+        return 0;
+    }
+    else
+    {
+        count = 1;
+        item* ptr = HashTable[index];
+        while(ptr -> next != NULL)
+        {
+            count = count + 1;
+            ptr = ptr -> next;
+        }
+        return count;
+    }
 }
 
 int hashClass::Hash(string key)
